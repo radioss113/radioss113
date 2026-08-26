@@ -57,10 +57,10 @@ static const char *NVS_KEY_FB3_URL = "fb3_url";
 static const char *NVS_KEY_FB3_ST = "fb3_station";
 static const char *NVS_KEY_FB3_MC = "fb3_mic";
 static const char *AP_SSID = "RadioSS113 Setup";
-static const char *DEFAULT_TTS_URL = "http://tts.smanf.net/stazione.mp3?engine=kokoro&voce=im_nicola&speed=1.20";
-static const char *DEFAULT_ANNOUNCE_URL = "http://tts.smanf.net/say.mp3?engine=kokoro&voce=im_nicola&speed=1.20";
+static const char *DEFAULT_TTS_URL = "http://tts.example.invalid/stazione.mp3?engine=kokoro&voce=default_voice&speed=1.20";
+static const char *DEFAULT_ANNOUNCE_URL = "http://tts.example.invalid/say.mp3?engine=kokoro&voce=default_voice&speed=1.20";
 static const char *DEFAULT_STARTUP_TEXT = "Radio SS113!";
-static const char *DEFAULT_BASE_HOST = "https://stream.radioss113.it";
+static const char *DEFAULT_BASE_HOST = "https://stream.example.invalid";
 static const int WIFI_CONNECT_GRACE_MS = 30000;
 static const int CATALOG_POLL_INTERVAL_MS = 30000;
 static const int NETWORK_FAILURE_RECONNECT_THRESHOLD = 4;
@@ -178,9 +178,9 @@ typedef enum {
 } stream_mode_t;
 
 static stream_desc_t kStreams[] = {
-    { "mare_installazione",   "https://pre.radioss113.it/mare_installazione", "" },
-    { "mare_strada",          "https://pre.radioss113.it/mare_strada", "" },
-    { "radio",                "https://icecast.smanf.net/radio", "" },
+    { "aux_environment",      "https://catalog.example.invalid/aux_environment", "" },
+    { "stereo_environment",   "https://catalog.example.invalid/stereo_environment", "" },
+    { "radio",                "https://catalog.example.invalid/radio", "" },
 };
 
 static key_desc_t kKeys[] = {

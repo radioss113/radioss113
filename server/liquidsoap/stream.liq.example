@@ -12,61 +12,61 @@ test = input.harbor("test",
   password = "CHANGE_ME_HARBOR_PASSWORD",
   buffer = 5.0)
 
-# Brolo
-brolo0 = input.harbor("alfredo",
+# Remote input A
+remote0 = input.harbor("remote0",
   port = 8005,
   password = "CHANGE_ME_HARBOR_PASSWORD",
   buffer = 5.0)
 
-# Casteldaccia
-casteldaccia0 = input.harbor("bettino",
+# Remote input B
+remote1 = input.harbor("remote1",
   port = 8005,
   password = "CHANGE_ME_HARBOR_PASSWORD",
   buffer = 5.0)
 
-# Trabia
+# Dynamic microphone inputs
 mic0 = input.harbor("mic0",
   port = 8005,
   user = "source",
-  password = "CHANGE_ME_TRABIA_PASSWORD",
+  password = "CHANGE_ME_DYNAMIC_INPUT_PASSWORD",
   buffer = 5.,
   max = 10.)
 
 mic1 = input.harbor("mic1",
   port = 8005,
   user = "source",
-  password = "CHANGE_ME_TRABIA_PASSWORD",
+  password = "CHANGE_ME_DYNAMIC_INPUT_PASSWORD",
   buffer = 5.,
   max = 10.)
 
-casteldaccia0 = filter.iir.eq.notch(
+remote1 = filter.iir.eq.notch(
   frequency = 10663.1,
   q = 1.2,
-  casteldaccia0
+  remote1
 )
-casteldaccia0 = filter.iir.eq.notch(
+remote1 = filter.iir.eq.notch(
   frequency = 15000.,
   q = 8.0,
-  casteldaccia0
+  remote1
 )
-casteldaccia0 = amplify(5.0, casteldaccia0)
+remote1 = amplify(5.0, remote1)
 
-brolo0 = filter.iir.eq.notch(
+remote0 = filter.iir.eq.notch(
   frequency = 10663.1,
   q = 1.2,
-  brolo0
+  remote0
 )
-brolo0 = filter.iir.eq.notch(
+remote0 = filter.iir.eq.notch(
   frequency = 15000.,
   q = 8.0,
-  brolo0
+  remote0
 )
-brolo0 = amplify(5.0, brolo0)
+remote0 = amplify(5.0, remote0)
 
 clock.assign_new(
   id = "harbor_ingest",
   sync = "cpu",
-  [mic0, mic1, brolo0, test]
+  [mic0, mic1, remote0, test]
 )
 
 def private_relaunch(src, mount) =
@@ -80,7 +80,7 @@ mount = mount,
 name = mount,
 description = "Radio SS113 - " ^ mount,
 genre = "soundscape",
-url = "https://radioss113.it",
+url = "https://project.example.invalid",
 public = false,
 fallible = true,
 src
@@ -106,7 +106,7 @@ mount = mount,
 name = name,
 description = "Radio SS113 - " ^ mount,
 genre = "soundscape",
-url = "https://radioss113.it",
+url = "https://project.example.invalid",
 public = true,
 fallible = true,
 src
@@ -124,7 +124,7 @@ mount = mount,
 name = name,
 description = "Radio SS113 - " ^ mount,
 genre = "soundscape",
-url = "https://radioss113.it",
+url = "https://project.example.invalid",
 public = false,
 fallible = true,
 src
@@ -140,5 +140,5 @@ s_sinistra = stereo.pan(-0.8, mic0_amplified)
 s_destra = stereo.pan(0.8, mic1_amplified)
 mic_stereo_combined = add([s_sinistra, s_destra])
 
-esp32_mp3_relaunch(mic_stereo_combined, "/mare_strada", "Mare Stereo ESP32")
-esp32_mp3_relaunch(mic1_amplified, "/mare_installazione", "Mare Installazione")
+esp32_mp3_relaunch(mic_stereo_combined, "/stereo_environment", "Stereo Environment")
+esp32_mp3_relaunch(mic1_amplified, "/aux_environment", "Aux Environment")

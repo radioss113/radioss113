@@ -13,10 +13,10 @@ SERVER = os.getenv("STREAM_SERVER", "127.0.0.1")
 STREAM_PORT = os.getenv("STREAM_PORT", "8005")
 PASSWORD = os.getenv("STREAM_PASSWORD", "CHANGE_ME")
 BITRATE = os.getenv("STREAM_BITRATE", "64k")
-CHECK_BASE_URL = os.getenv("CHECK_BASE_URL", "https://pre.radioss113.it")
+CHECK_BASE_URL = os.getenv("CHECK_BASE_URL", "https://monitor.example.invalid")
 INST_DIR = Path(os.getenv("INSTANCE_ENV_DIR", "/etc/ffmpeg-stream/instances"))
 REC_DIR = Path(os.getenv("RECORDINGS_DIR", "/var/recordings/ffmpeg"))
-STREAM_USER = os.getenv("STREAM_USER", "radioss113")
+STREAM_USER = os.getenv("STREAM_USER", "streamuser")
 
 
 def parse_cards():

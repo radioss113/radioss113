@@ -30,7 +30,7 @@ log = logging.getLogger("icecast-segmenter")
 RECORDINGS_ROOT = Path(os.getenv("RECORDINGS_ROOT", "/var/www/html/web/recordings"))
 TIMESTAMP_PUSH_URL = os.getenv("TIMESTAMP_PUSH_URL", "http://127.0.0.1:8090/push")
 TIMESTAMP_TOKEN = os.getenv("EVENTS_PUSH_TOKEN", "CHANGE_ME")
-PUBLIC_BASE_URL = os.getenv("PUBLIC_BASE_URL", "https://radioss113.it/recordings")
+PUBLIC_BASE_URL = os.getenv("PUBLIC_BASE_URL", "https://archive.example.invalid/recordings")
 
 RUNNING = True
 

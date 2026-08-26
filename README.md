@@ -38,6 +38,7 @@ In modo semplificato, l'architettura e' questa:
 
 - `server/`: nodo centrale che riceve gli stream, li pubblica, li archivia e li analizza
 - `mic-raspberry-pi4/`: nodo microfonico su `Raspberry Pi 4` che rileva i microfoni collegati e avvia automaticamente le istanze `ffmpeg`
+- `raspberry-pi4-tts-node/`: nodo ausiliario con servizi `TTS` e altri componenti locali
 - `stazione-di-ascolto-esp32/`: firmware per nodi microfonici su `ESP32 A1S`
 - `esp32-a1s-playback-system/`: firmware per nodi di riproduzione audio su `ESP32 A1S`
 
@@ -78,6 +79,7 @@ radio-ss113/
   README.md
   server/
   mic-raspberry-pi4/
+  raspberry-pi4-tts-node/
   stazione-di-ascolto-esp32/
     single-mic-duplicated-lr/
     dual-mic-stereo-lr/

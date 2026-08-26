@@ -18,7 +18,7 @@ Baseline corrente:
 - stream: `Opus/Ogg` stereo verso `Liquidsoap/Icecast input.harbor`
 - bitrate Opus: `128 kbps`
 - AP di configurazione: `Radio SS113 Alfredo`
-- default URL harbor nel portale: `http://radioss113.it:8005/`
+- default URL harbor nel portale: `http://stream-host.example.invalid:8005/`
 - default nome dispositivo nel portale: `test`
 - reset runtime: long-press `GPIO5` per 5 secondi, cancella solo le chiavi runtime NVS
 

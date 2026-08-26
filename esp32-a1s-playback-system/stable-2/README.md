@@ -28,4 +28,4 @@ Questa variante privilegia l'affidabilita' generale della connessione Wi-Fi, del
 
 ## File di riferimento
 
-- `player_stable_2_brolo.c`
+- `player_stable_2.c`

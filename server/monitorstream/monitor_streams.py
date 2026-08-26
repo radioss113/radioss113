@@ -9,7 +9,7 @@ import telebot
 
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "CHANGE_ME")
 CHAT_ID = int(os.getenv("TELEGRAM_CHAT_ID", "0"))
-HOST = os.getenv("PUBLIC_STREAM_HOST", "https://stream.radioss113.it")
+HOST = os.getenv("PUBLIC_STREAM_HOST", "https://stream.example.invalid")
 
 MICS_OPUS = [
     "mic0.opus",
