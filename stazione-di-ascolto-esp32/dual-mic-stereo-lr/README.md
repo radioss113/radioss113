@@ -1,6 +1,8 @@
 # Dual Mic Stereo L/R
 
-Versione della stazione di ascolto ESP32 che usa entrambi i microfoni onboard in stereo reale.
+Versione della stazione di ascolto ESP32 che usa due microfoni distinti in stereo reale.
+
+Il canale sinistro e il canale destro restano separati lungo tutta la catena di acquisizione e streaming, permettendo di conservare la differenza spaziale tra i due segnali.
 
 ## Profilo
 
@@ -13,9 +15,10 @@ Versione della stazione di ascolto ESP32 che usa entrambi i microfoni onboard in
 
 ## Comportamento
 
-- stessa infrastruttura Wi-Fi, Harbor e portal della variante mono
-- stereo reale dei due microfoni
-- baseline consigliata quando serve separazione `left/right`
+- acquisisce due microfoni distinti
+- mantiene la separazione `left/right`
+- usa la stessa infrastruttura Wi-Fi, portal e Harbor della variante mono
+- e' la variante consigliata quando serve stereo reale
 
 ## File di riferimento
 

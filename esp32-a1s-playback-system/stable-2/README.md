@@ -1,6 +1,8 @@
 # Stable 2
 
-Versione stabile dell'impianto di riproduzione A1S orientata a una base affidabile per Wi-Fi, captive portal e selezione stream.
+Versione stabile di base dell'impianto di riproduzione A1S.
+
+Questa variante privilegia l'affidabilita' generale della connessione Wi-Fi, del captive portal e della riproduzione degli stream, senza introdurre un polling periodico dei mountpoint.
 
 ## Funzioni principali
 
@@ -10,6 +12,12 @@ Versione stabile dell'impianto di riproduzione A1S orientata a una base affidabi
 - catalogo Icecast
 - fallback configurabili
 - TTS live o buffered
+
+## Ruolo nel progetto
+
+- base stabile e semplice da mantenere
+- adatta quando non serve aggiornare periodicamente lo stato dei mountpoint
+- riferimento per la variante `stable-3`
 
 ## Controlli osservati
 

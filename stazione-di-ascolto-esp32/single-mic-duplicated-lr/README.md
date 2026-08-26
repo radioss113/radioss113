@@ -1,6 +1,8 @@
 # Single Mic Duplicated L/R
 
-Versione stabile della stazione di ascolto ESP32 che usa un solo canale microfonico e lo duplica sui due canali dello stream stereo.
+Versione della stazione di ascolto ESP32 pensata per usare un solo microfono.
+
+Il segnale acquisito viene duplicato sui due canali dello stream, quindi in uscita si ottiene un flusso stereo compatibile con molte pipeline audio, ma con contenuto identico su sinistra e destra.
 
 ## Profilo
 
@@ -12,7 +14,8 @@ Versione stabile della stazione di ascolto ESP32 che usa un solo canale microfon
 
 ## Comportamento
 
-- baseline semplice e collaudata
+- acquisisce un solo ingresso microfonico
+- duplica il segnale su `L` e `R`
 - compatibile con pipeline stereo lato server
 - non produce stereo reale
 
