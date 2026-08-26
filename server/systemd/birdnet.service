@@ -1,0 +1,16 @@
+[Unit]
+Description=BirdNET Analyzer avvio
+After=network.target sound.target
+
+[Service]
+Type=simple
+User=radio
+Group=radio
+WorkingDirectory=/home/radio/BirdNET-Analyzer
+ExecStart=/opt/birdnet-venv/bin/python /home/radio/BirdNET-Analyzer/avvio.py
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,17 @@
+[Unit]
+Description=YAMNet vehicle/event analyzer
+Wants=network-online.target
+After=network-online.target sound.target
+
+[Service]
+Type=simple
+User=radio
+Group=radio
+WorkingDirectory=/home/radio/YAMNet
+ExecStart=/opt/birdnet-venv/bin/python /home/radio/YAMNet/avvio.py
+Restart=always
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+[Install]
+WantedBy=multi-user.target

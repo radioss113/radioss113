@@ -1,0 +1,144 @@
+# Radio SS113 - example Liquidsoap config
+settings.log.file := false
+settings.log.level := 3
+settings.harbor.bind_addrs := ["0.0.0.0"]
+settings.frame.audio.size := 1920
+settings.decoder.priorities.ogg := 30
+settings.frame.audio.samplerate := 48000
+
+# Harbor default per nuovi ingressi
+test = input.harbor("test",
+  port = 8005,
+  password = "CHANGE_ME_HARBOR_PASSWORD",
+  buffer = 5.0)
+
+# Brolo
+brolo0 = input.harbor("alfredo",
+  port = 8005,
+  password = "CHANGE_ME_HARBOR_PASSWORD",
+  buffer = 5.0)
+
+# Casteldaccia
+casteldaccia0 = input.harbor("bettino",
+  port = 8005,
+  password = "CHANGE_ME_HARBOR_PASSWORD",
+  buffer = 5.0)
+
+# Trabia
+mic0 = input.harbor("mic0",
+  port = 8005,
+  user = "source",
+  password = "CHANGE_ME_TRABIA_PASSWORD",
+  buffer = 5.,
+  max = 10.)
+
+mic1 = input.harbor("mic1",
+  port = 8005,
+  user = "source",
+  password = "CHANGE_ME_TRABIA_PASSWORD",
+  buffer = 5.,
+  max = 10.)
+
+casteldaccia0 = filter.iir.eq.notch(
+  frequency = 10663.1,
+  q = 1.2,
+  casteldaccia0
+)
+casteldaccia0 = filter.iir.eq.notch(
+  frequency = 15000.,
+  q = 8.0,
+  casteldaccia0
+)
+casteldaccia0 = amplify(5.0, casteldaccia0)
+
+brolo0 = filter.iir.eq.notch(
+  frequency = 10663.1,
+  q = 1.2,
+  brolo0
+)
+brolo0 = filter.iir.eq.notch(
+  frequency = 15000.,
+  q = 8.0,
+  brolo0
+)
+brolo0 = amplify(5.0, brolo0)
+
+clock.assign_new(
+  id = "harbor_ingest",
+  sync = "cpu",
+  [mic0, mic1, brolo0, test]
+)
+
+def private_relaunch(src, mount) =
+output.icecast(
+%opus,
+host = "127.0.0.1",
+port = 8001,
+user = "source",
+password = "CHANGE_ME_ICECAST_SOURCE_PASSWORD",
+mount = mount,
+name = mount,
+description = "Radio SS113 - " ^ mount,
+genre = "soundscape",
+url = "https://radioss113.it",
+public = false,
+fallible = true,
+src
+)
+end
+
+private_relaunch(mic0, "/mic0.opus")
+private_relaunch(mic1, "/mic1.opus")
+
+delay_sec = 120.
+
+mic0_delayed = buffer(buffer=delay_sec, max=delay_sec + 10., mic0)
+mic1_delayed = buffer(buffer=delay_sec, max=delay_sec + 10., mic1)
+
+def public_relaunch(src, mount, name) =
+output.icecast(
+%mp3(bitrate=192),
+host = "127.0.0.1",
+port = 8000,
+user = "source",
+password = "CHANGE_ME_ICECAST_SOURCE_PASSWORD",
+mount = mount,
+name = name,
+description = "Radio SS113 - " ^ mount,
+genre = "soundscape",
+url = "https://radioss113.it",
+public = true,
+fallible = true,
+src
+)
+end
+
+def esp32_mp3_relaunch(src, mount, name) =
+output.icecast(
+%mp3(bitrate=192, samplerate=44100),
+host = "127.0.0.1",
+port = 8001,
+user = "source",
+password = "CHANGE_ME_ICECAST_SOURCE_PASSWORD",
+mount = mount,
+name = name,
+description = "Radio SS113 - " ^ mount,
+genre = "soundscape",
+url = "https://radioss113.it",
+public = false,
+fallible = true,
+src
+)
+end
+
+mic0_amplified = normalize(target = 0.0, gain_max = 3.0, threshold = -40.0, mic0)
+mic0_amplified = limit(mic0_amplified, threshold = -1.5, attack = 5.0, release = 400.0)
+
+mic1_amplified = amplify(5.0, mic1)
+
+s_sinistra = stereo.pan(-0.8, mic0_amplified)
+s_destra = stereo.pan(0.8, mic1_amplified)
+mic_stereo_combined = add([s_sinistra, s_destra])
+
+esp32_mp3_relaunch(mic_stereo_combined, "/mare_strada", "Mare Stereo ESP32")
+esp32_mp3_relaunch(mic1_amplified, "/mare_installazione", "Mare Installazione")

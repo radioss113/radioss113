@@ -1,0 +1,23 @@
+[Unit]
+Description=Monitor stream Radio SS113 (Telegram alerts)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=radio
+Group=radio
+WorkingDirectory=/home/radio/monitorstream
+ExecStart=/usr/bin/python3 /home/radio/monitorstream/monitor_streams.py
+Restart=on-failure
+RestartSec=5
+Environment=PYTHONUNBUFFERED=1
+
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=full
+ProtectHome=read-only
+ReadWritePaths=/home/radio/monitorstream
+
+[Install]
+WantedBy=multi-user.target
