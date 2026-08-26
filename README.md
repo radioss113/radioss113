@@ -1,7 +1,8 @@
 # Radio SS113
 
-`Radio SS113` e' un progetto di ascolto, trasmissione e riproduzione audio distribuito tra un server centrale e nodi remoti, basati su `Raspberry Pi 4` oppure `ESP32 A1S`.
+`Radio SS113` e' un'infrastruttura di ascolto, trasmissione, analisi e riproduzione del paesaggio sonoro.
 
+Il repository raccoglie documentazione tecnica, configurazioni di esempio e firmware dei nodi che compongono il sistema.
 
 ## Il progetto
 
@@ -10,6 +11,8 @@
 L'idea centrale e' ascoltare e documentare il rapporto tra ambiente costruito e ambiente acquatico, mettendo in relazione i suoni della strada, del mare, delle attivita' umane e delle presenze non umane che convivono lungo questo tratto di costa.
 
 Attraverso registrazione continua, streaming e analisi automatica, il progetto costruisce una memoria sonora del territorio e rende possibile una riflessione sul rumore, sull'antropizzazione e sulle trasformazioni ecologiche del paesaggio.
+
+Questo repository documenta la parte tecnica che rende possibile quel lavoro: acquisizione dei segnali, invio degli stream, pubblicazione, monitoraggio, analisi e riproduzione.
 
 ## Cosa fa
 
@@ -23,18 +26,19 @@ Il sistema permette di:
 - analizzare automaticamente l'audio con strumenti come `YAMNet` e `BirdNET`
 - riprodurre stream e messaggi `TTS` su nodi `ESP32 A1S`
 
-## Come si usa nel progetto
+## A cosa serve
 
 L'infrastruttura e' pensata per sostenere piu' livelli di utilizzo:
 
 - ascolto remoto in tempo reale degli stream raccolti sul territorio
 - confronto tra sorgenti diverse, come mare, strada e altri punti di ripresa
+- archiviazione e consultazione di registrazioni e metadati
 - analisi automatica di eventi sonori, fauna, traffico e agenti atmosferici
 - uso in contesti espositivi o installativi, dove gli stream possono essere riprodotti nello spazio
 
 ## Architettura
 
-In modo semplificato, l'architettura e' questa:
+In forma semplificata, il sistema e' composto da questi blocchi:
 
 - `server/`: nodo centrale che riceve gli stream, li pubblica, li archivia e li analizza
 - `mic-raspberry-pi4/`: nodo microfonico su `Raspberry Pi 4` che rileva i microfoni collegati e avvia automaticamente le istanze `ffmpeg`
@@ -53,7 +57,7 @@ Il flusso generale e' il seguente:
 
 ### Stazione di ascolto ESP32
 
-- `single-mic-duplicated-lr`: acquisisce un solo microfono e duplica lo stesso segnale su sinistra e destra; e' utile quando si vuole uno stream stereo compatibile ma il contenuto audio e' mono
+- `single-mic-duplicated-lr`: acquisisce un solo microfono e duplica lo stesso segnale su sinistra e destra; e' utile quando serve compatibilita' con una pipeline stereo ma il contenuto audio resta mono
 - `dual-mic-stereo-lr`: acquisisce due microfoni distinti e mantiene i due canali separati in stereo reale `left/right`
 
 ### Impianto di riproduzione ESP32
@@ -61,9 +65,9 @@ Il flusso generale e' il seguente:
 - `stable-2`: versione stabile di base, orientata all'affidabilita' generale, senza polling periodico dei mountpoint
 - `stable-3`: estensione della base stabile che aggiunge polling periodico dei mountpoint e una gestione piu' autonoma della selezione degli stream
 
-## Sito pilota e sviluppi
+## Evoluzione del sistema
 
-La piattaforma e' stata pensata per partire da una stazione pilota e potersi estendere in futuro ad altre stazioni di ascolto distribuite lungo la `SS113`.
+La piattaforma e' stata pensata per partire da una prima stazione di ascolto e potersi estendere in futuro ad altri punti distribuiti lungo la `SS113`.
 
 Nel suo sviluppo completo, il sistema puo' integrare:
 
