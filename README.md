@@ -23,9 +23,3 @@ radio-ss113/
     stable-2/
     stable-3/
 ```
-
-## Note
-
-- Le credenziali non devono essere versionate.
-- Le configurazioni sensibili vanno spostate in file `.env`, env file `systemd` o secret file locali.
-- Le registrazioni audio, i dump e i file generati in produzione vanno esclusi dal repository.
