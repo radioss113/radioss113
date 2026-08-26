@@ -1,0 +1,12 @@
+[Unit]
+Description=Configurazione dinamica ed avvio FFmpeg streamer
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/python3 /usr/local/bin/ffmpeg-discovery-launch.py
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,15 @@
+[Unit]
+Description=FFmpeg Opus Streamer per %I
+After=network.target
+
+[Service]
+Type=simple
+CPUSchedulingPolicy=rr
+CPUSchedulingPriority=90
+EnvironmentFile=/etc/ffmpeg-stream/instances/%i.env
+ExecStart=/usr/bin/ffmpeg -f alsa -thread_queue_size 4096 -use_wallclock_as_timestamps 1 -channels 2 -sample_rate 48000 -i plughw:${CARD},0 -af pan=mono|c0=c0,asetpts=N/SR/TB,aresample=async=1,highpass=f=45 -c:a libopus -b:a ${BITRATE} -vbr on -compression_level 10 -frame_duration 20 -ac 1 -ar 48000 -content_type audio/ogg -f ogg -timeout 10000000 icecast://source:${PASSWORD}@${SERVER}:${PORT}/${INSTANCE} -nostdin
+Restart=always
+RestartSec=3s
+
+[Install]
+WantedBy=multi-user.target
