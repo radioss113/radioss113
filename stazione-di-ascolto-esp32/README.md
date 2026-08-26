@@ -1,4 +1,4 @@
-# ESP32 A1S Listening Station
+# Stazione Di Ascolto ESP32
 
 Firmware microfono per `ESP32 Audio Kit A1S v2.2 / A541`.
 

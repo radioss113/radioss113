@@ -1,6 +1,6 @@
 # Dual Mic Stereo L/R
 
-Versione della stazione di ascolto A1S che usa entrambi i microfoni onboard in stereo reale.
+Versione della stazione di ascolto ESP32 che usa entrambi i microfoni onboard in stereo reale.
 
 ## Profilo
 

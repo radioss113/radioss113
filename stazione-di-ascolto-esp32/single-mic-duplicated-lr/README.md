@@ -1,6 +1,6 @@
 # Single Mic Duplicated L/R
 
-Versione stabile della stazione di ascolto A1S che usa un solo canale microfonico e lo duplica sui due canali dello stream stereo.
+Versione stabile della stazione di ascolto ESP32 che usa un solo canale microfonico e lo duplica sui due canali dello stream stereo.
 
 ## Profilo
 
